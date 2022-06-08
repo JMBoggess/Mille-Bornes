@@ -451,10 +451,13 @@ class Game():
             for i in range(players_count):
                 self.teams.append(Team(i + 1))
                 self.players.append(Player(player_names[i], self.teams[i]))
+                self.teams[i].name = f"Team {i + 1} ({player_names[i]})"
         else:
             teams_count = players_count // 2
             self.teams = [Team(i + 1) for i in range(teams_count)]
             self.players = [Player(player_names[i], self.teams[i % teams_count]) for i in range(players_count)]
+            for i in range(teams_count):
+                self.teams[i].name = "Team {0} ({1})".format(i + 1, ', '.join(player_names[i::teams_count]))
         
         # Setup the playing deck
         self.deck = Deck(self.card_matrix, players_count)
@@ -879,7 +882,7 @@ class Game():
             4     Number of cards left in deck (unplayed; recognition this is not an infinite horizon)
             5-15  Action (index) history taken by other players prior to the current player's turn (-1 for n/a) most recent action first (reverse order)
             16    Team 1 Speed Status (0 = No speed limit; 1 = Speed Limit)
-            17    Team 1 Battle Status (0 = Out of Gas; 1 = Flat Tire; 2 = Acciden; 3 = Stop; 4 = Go)
+            17    Team 1 Battle Status (0 = Out of Gas; 1 = Flat Tire; 2 = Accident; 3 = Stop; 4 = Go)
             18    Team 1 Distance points
             19    Team 1 Number of 200 distance point cards played (0, 1, 2)
             20    Team 1 Extra Tank (0 = No; 1 = Yes)
