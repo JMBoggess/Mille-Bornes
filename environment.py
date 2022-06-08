@@ -96,7 +96,7 @@ def actions_space(state, card_matrix, action_matrix):
     team_status.append(state[24:32])  # Team 2
     if state[32] > -1:
         team_status.append(state[32:40])  # Team 3
-    player_hand = [Card(card_matrix[c][0], card_matrix[c][1]) for c in state[40:46] if c > -1]
+    player_hand = [Card(card_matrix[c][0], card_matrix[c][1]) for c in state[40:47] if c > -1]
     
     # Variable to hold valid actions - use set to prevent duplicate action potentials (e.g. player has 2 cards of the same value)
     player_actions = set()
